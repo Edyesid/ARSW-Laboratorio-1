@@ -6,6 +6,8 @@
 package edu.eci.arsw.blacklistvalidator;
 
 import edu.eci.arsw.spamkeywordsdatasource.HostBlacklistsDataSourceFacade;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,31 +30,59 @@ public class HostBlackListsValidator {
      * NOT Trustworthy, and the list of the five blacklists returned.
      * @param ipaddress suspicious host's IP address.
      * @return  Blacklists numbers where the given host's IP address was found.
+     * @throws InterruptedException 
      */
-    public List<Integer> checkHost(String ipaddress){
-        
+    public List<Integer> checkHost(String ipaddress, int n) throws InterruptedException{
+    	
+    	
+    	ArrayList<ThreadSearch> list = new ArrayList<>();
+    	
         LinkedList<Integer> blackListOcurrences=new LinkedList<>();
         
-        int ocurrencesCount=0;
+        int ocurrencesCount = 0;
         
         HostBlacklistsDataSourceFacade skds=HostBlacklistsDataSourceFacade.getInstance();
         
-        int checkedListsCount=0;
+        Boolean check = ((skds.getRegisteredServersCount() % n) == 0);
         
-        for (int i=0;i<skds.getRegisteredServersCount() && ocurrencesCount<BLACK_LIST_ALARM_COUNT;i++){
-            checkedListsCount++;
-            
-            if (skds.isInBlackListServer(i, ipaddress)){
-                
-                blackListOcurrences.add(i);
-                
-                ocurrencesCount++;
-            }
+        int checkedListsCount = 0;
+        
+        int div = skds.getRegisteredServersCount() / n;
+        
+        if(check) {
+        	
+        	for (int i = 0; i < n; i++) {
+        		list.add(new ThreadSearch(ipaddress,i * div, (i * div) + div));
+        	}
+        } else {
+        	for (int j = 0; j < n; j++) {
+        		if (j == div - 1) {
+        			list.add(new ThreadSearch(ipaddress,j * div, div + (skds.getRegisteredServersCount() % n) + (j * div)));
+        		} else {
+        			list.add(new ThreadSearch(ipaddress,j * div, (j * div) + div));
+        		}
+        	}
         }
+        
+        for (int i = 0; i < list.size(); i++) {
+        	list.get(i).start();
+        }
+        
+        for (int i = 0; i < list.size(); i++) {
+        	list.get(i).join();
+        }
+        
+        for (int i = 0; i < list.size(); i++) {
+        	ocurrencesCount += list.get(i).getCheckedListsCount();
+        	blackListOcurrences.addAll(list.get(i).getblacklistOcurrences());
+        }
+        
+        //System.out.println(ocurrencesCount);
         
         if (ocurrencesCount>=BLACK_LIST_ALARM_COUNT){
             skds.reportAsNotTrustworthy(ipaddress);
         }
+        
         else{
             skds.reportAsTrustworthy(ipaddress);
         }                

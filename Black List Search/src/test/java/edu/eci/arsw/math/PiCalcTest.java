@@ -18,7 +18,7 @@ public class PiCalcTest {
     public PiCalcTest() {
     }
 
-    @Before
+/**    @Before
     public void setUp() {
     }
 
@@ -47,6 +47,6 @@ public class PiCalcTest {
                 }
             }
         }
-    }
+    }**/
 
 }

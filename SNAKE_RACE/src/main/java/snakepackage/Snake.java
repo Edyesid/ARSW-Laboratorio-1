@@ -45,7 +45,6 @@ public class Snake extends Observable implements Runnable {
         growing = INIT_SIZE - 1;
     }
 
-    @Override
     public void run() {
         while (!snakeEnd) {
             

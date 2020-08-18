@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.primefinder;
+package primefinder;
+
+import java.util.Scanner;
 
 /**
  *
@@ -39,6 +41,34 @@ public class Control extends Thread {
         for(int i = 0;i < NTHREADS;i++ ) {
             pft[i].start();
         }
+        
+        while (true) {
+        	
+        	try {
+        		sleep(TMILISECONDS);
+        		for(int i = 0;i < NTHREADS;i++ ) {
+                    pft[i].detener();
+                    System.out.println("Cantidad de numeros primos: " + pft[i].getPrimes().size());
+                }
+        		System.out.println("");
+        		System.out.println("Presione Enter para continuar");
+        		
+        		Scanner scan = new Scanner(System.in);
+        		while(scan.nextLine()==null) {
+        			System.out.println("No reconocido");
+        			System.out.println("Presione Enter para continuar");
+        			scan = new Scanner(System.in);
+        		}
+        		for(int i = 0;i < NTHREADS;i++ ) {
+                    pft[i].reanudar();
+                }
+        	}
+        	catch(InterruptedException e){
+        		e.printStackTrace();
+        	}
+        	
+        }
+        
     }
     
 }

@@ -40,7 +40,7 @@ Said component is designed according to the following diagram, where:
 
 - HostBlackListsValidator is a class that offers the checkHost method, which, through the HostBlackListDataSourceFacade class, validates a given host in each of the blacklists. In this method is considered the policy that when a HOST is found in at least five blacklists, it will be registered as not reliable, or as reliable otherwise. Additionally, it will return the list of the numbers of the blacklists where the HOST was registered.
 
-IMAGEN
+![Model](https://user-images.githubusercontent.com/54051399/90593984-f6d5fe80-e1ae-11ea-9567-1c436fcfa94b.png)
 
 When using the module, the evidence that the registration was made as reliable or not reliable is given by the messages of LOGs:
 
@@ -56,15 +56,27 @@ To refactor this code, and have it exploit the multi-core capability of the comp
 
 1. Create a Thread class that represents the life cycle of a thread that searches for a segment of the pool of available servers. Add to that class a method that allows you to ask the instances of it (the threads) how many occurrences of malicious servers it has found or found.
 
+![clase thread](https://user-images.githubusercontent.com/54051399/90594412-f427d900-e1af-11ea-9647-0540ececb7f8.PNG)
+
+Se muestra la clase ThreadSearch implementada.
+
 2. Add to the checkHost method an integer parameter N, corresponding to the number of threads between which the search will be carried out (remember to take into account if N is even or odd!). Modify the code of this method so that it divides the search space between the indicated N parts, and parallels the search through N threads. Have that function wait until the N threads finish solving their respective sub-problem, add the occurrences found for each thread to the list that returns the method, and then calculate (adding the total number of occurrences found for each thread) if the Number of occurrences is greater than or equal to BLACK_LIST_ALARM_COUNT. If this is the case, in the end the host MUST be reported as reliable or not reliable, and the list should be shown with the numbers of the respective blacklists. To achieve this wait behavior, review the join method of the Java concurrency API. Also keep in mind:
 
+![check host](https://user-images.githubusercontent.com/54051399/90594452-13266b00-e1b0-11ea-9286-5cd32eb46089.PNG)
+
+Metodo CheckHost modificado
+
   - Inside the checkHost method the LOG must be kept informing, before returning the result, the number of revised blacklists VS. the number of total blacklists (line 60). It must be guaranteed that said information is true under the new parallel processing scheme proposed.
+  
+  ![log](https://user-images.githubusercontent.com/54051399/90594488-2afdef00-e1b0-11ea-9c15-2d03a5334135.PNG)
 
   - It is known that HOST 202.24.34.55 is blacklisted in a more dispersed way, and that host 212.24.24.55 is NOT on any blacklist.
 
 ### Part III - Discussion
 
 The strategy of parallelism previously implemented is inefficient in certain cases, since the search is still carried out even when the N threads (as a whole) have already found the minimum number of occurrences required to report to the server as malicious. How could the implementation be modified to minimize the number of queries in these cases? What new element would this bring to the problem?
+
+Al momento de quere minimizar la cantidad de consultas por cada caso, el utilizar el parametro BLACK_LIST_ALARM_COUNT como variable comun para todos los threads ayuda a reducir considerablemente estas consultas ya que de esta manera todos los threads seran consientes de cuando se llegue al menor numero de ocurrencias y detendran la realizacion de consultas.
 
 ### Part IV - Performance Evaluation
 
@@ -78,13 +90,13 @@ From the above, implement the following sequence of experiments to perform the v
 
 When starting the program run the monitor jVisualVM, and as you run the tests, review and record the CPU and memory consumption in each case.
 
-IMAGEN
+![jvisualvm](https://user-images.githubusercontent.com/54051399/90594051-1d943500-e1af-11ea-8ab4-a5d96a853c72.png)
 
 With the above, and with the given execution times, make a graph of solution time vs. Number of threads. Analyze and hypothesize with your partner for the following questions (you can take into account what was reported by jVisualVM):
 
 - According to Amdahls law, where S(n) is the theoretical improvement of performance, P the parallel fraction of the algorithm, and n the number of threads, the greater n, the better this improvement should be. Why is the best performance not achieved with the 500 threads? How is this performance compared when using 200 ?.
 
-IMAGEN
+![ahmdahls](https://user-images.githubusercontent.com/54051399/90594127-474d5c00-e1af-11ea-9fc1-91f9f4a9c90f.png)
 
 - How does the solution behave using as many processing threads as cores compared to the result of using twice as much?
 

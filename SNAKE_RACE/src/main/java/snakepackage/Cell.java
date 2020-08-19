@@ -6,7 +6,7 @@ package snakepackage;
  * contem informacao sobre o estado da celula, 
  * se contem elementos,
  *  quais, 
- *  e trata da Sincronizacao e coordenacao no acesso � mesma
+ *  e trata da Sincronizacao e coordenacao no acesso ï¿½ mesma
  * 
  * @author Joao Andrade 28445
  * @author Diana Pereira 38074
@@ -47,7 +47,7 @@ public class Cell {
 	/**
 	 * Poe turbo-boost na celula.
 	 *
-	 * @param turbo_boost � novo turbo-boost
+	 * @param turbo_boost ï¿½ novo turbo-boost
 	 */
 	public void setTurbo_boost(boolean turbo_boost) {
 		this.turbo_boost = turbo_boost;
@@ -65,7 +65,7 @@ public class Cell {
 	/**
 	 * Poe comida na celula
 	 *
-	 * @param food � a nova comida
+	 * @param food ï¿½ a nova comida
 	 */
 	public void setFood(boolean food) {
 		this.food = food;
@@ -83,7 +83,7 @@ public class Cell {
 	/**
 	 * Poe salto-ao-eixo na celula
 	 *
-	 * @param jump_pad � o novo salto-ao-eixo
+	 * @param jump_pad ï¿½ o novo salto-ao-eixo
 	 */
 	public void setJump_pad(boolean jump_pad) {
 		this.jump_pad = jump_pad;
@@ -137,7 +137,7 @@ public class Cell {
 	}
 
 	/**
-	 * Verifica se Celula est� cheia (com cobras ou barreiras)
+	 * Verifica se Celula estï¿½ cheia (com cobras ou barreiras)
 	 *
 	 * @return true, se estiver full
 	 */

@@ -2,6 +2,8 @@ package snakepackage;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
@@ -17,8 +19,11 @@ import javax.swing.JPanel;
  * @author jd-
  *
  */
-public class SnakeApp {
-
+public class SnakeApp extends JFrame {
+	private JButton inicio;
+	private JButton reanudar;
+	private JButton pausar;
+	private boolean runnig;
     private static SnakeApp app;
     public static final int MAX_THREADS = 8;
     Snake[] snakes = new Snake[MAX_THREADS];
@@ -39,6 +44,7 @@ public class SnakeApp {
     Thread[] thread = new Thread[MAX_THREADS];
 
     public SnakeApp() {
+    	runnig = false;
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         frame = new JFrame("The Snake Race");
         frame.setLayout(new BorderLayout());
@@ -52,11 +58,17 @@ public class SnakeApp {
         
         
         frame.add(board,BorderLayout.CENTER);
-        
+        inicio = new JButton("Iniciar");
+        pausar = new JButton("pausar");
+        reanudar = new JButton("reanudar");
         JPanel actionsBPabel=new JPanel();
         actionsBPabel.setLayout(new FlowLayout());
-        actionsBPabel.add(new JButton("Action "));
+        actionsBPabel.add(inicio);
+        actionsBPabel.add(pausar);
+        actionsBPabel.add(reanudar);
         frame.add(actionsBPabel,BorderLayout.SOUTH);
+        actions();
+
 
     }
 
@@ -74,7 +86,7 @@ public class SnakeApp {
             snakes[i] = new Snake(i + 1, spawn[i], i + 1);
             snakes[i].addObserver(board);
             thread[i] = new Thread(snakes[i]);
-            thread[i].start();
+            //thread[i].start();
         }
 
         frame.setVisible(true);
@@ -105,4 +117,62 @@ public class SnakeApp {
         return app;
     }
 
+    public void actions() {
+        ActionListener oyenteBotonInicio = new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                iniciar();
+            }   
+        };  
+        inicio.addActionListener(oyenteBotonInicio);
+        
+        ActionListener oyenteBotonPausar = new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                pausar();
+            }   
+        };  
+        pausar.addActionListener(oyenteBotonPausar);
+        
+        ActionListener oyenteBotonReanudar = new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                reanudar();
+            }   
+        };  
+        reanudar.addActionListener(oyenteBotonReanudar);
+        
+        
+    }
+    
+    public void iniciar() {
+    	
+    	if (runnig) {
+    		System.out.println("Corriendo");
+    	} else {
+            for (int i = 0; i != MAX_THREADS; i++) {
+
+                thread[i].start();
+            }
+            
+            iniciado();
+    	}
+    }
+    
+    public void pausar() {
+
+        for (int i = 0; i != MAX_THREADS; i++) {
+
+            snakes[i].pause();
+        }
+    }
+    
+    public void reanudar() {
+
+        for (int i = 0; i != MAX_THREADS; i++) {
+
+           snakes[i].continuar();
+        }
+    } 
+    
+    public void iniciado() {
+    	runnig = true;
+    }
 }

@@ -20,7 +20,7 @@ public class Board extends JLabel implements Observer {
 	private static final long serialVersionUID = 1L;
 	public static final int NR_BARRIERS = 5;
 	public static final int NR_JUMP_PADS = 2;
-	public static final int NR_TURBO_BOOSTS = 2;
+	public static final int NR_TURBO_BOOSTS = 20;
 	public static final int NR_FOOD = 5;
 	static Cell[] food = new Cell[NR_FOOD];
 	static Cell[] barriers = new Cell[NR_BARRIERS];

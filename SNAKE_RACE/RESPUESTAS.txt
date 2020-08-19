@@ -1,0 +1,16 @@
+Posible condiciones de carrera:
+1. Dos o mas Serpientes intenten comer un mismo raton
+2. Dos o mas serpientes intenten agarrar un mismo rayo
+3. Dos o mas serpientes intentan atravezar un mismo portal
+
+Uso incorrecto de las colecciones:
+Se encontro la excepcion Exception in thread "AWT-EventQueue-0"
+que posiblemente fue por una condicion de carrera
+
+innecesario uso de esperas:
+para dar velocidad al juego se tiene que esperar siempre 500 milisegundos
+
+soluciones para las condiciones de carrera
+1.Seleccionar aleatoriamente la serpiente que gana el raton
+2.Seleccionar aletoriamente la serpiente que gana el rayo
+3.Seleccionar a la serpiente mas grande para que atravece el portal

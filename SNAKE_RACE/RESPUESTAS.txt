@@ -1,0 +1,24 @@
+Respuestas Snake 
+1. Posibles condiciones de carrera:
+
+	1,1. Dos o mas Serpientes intenten comer un mismo raton
+	1,2. Dos o mas serpientes intenten agarrar un mismo rayo
+	1,3. Dos o mas serpientes intentan atravezar un mismo portal
+
+2. Uso incorrecto de las colecciones:
+
+Se encontro la excepcion Exception in thread "AWT-EventQueue-0"
+que posiblemente fue por una condicion de carrera
+
+Cuando una serpiente no aumenta su tamaño libera la ultima celda de su cuerpo y 
+si hay otra serpiente encima podría generar problemas ya que puede dejar un hueco 
+en el cuerpo y colocar cualquier objeto en esta celda.
+
+3. Innecesario uso de esperas:
+
+Para dar velocidad al juego se tiene que esperar siempre 500 milisegundos
+
+Soluciones para las condiciones de carrera
+1. Seleccionar aleatoriamente la serpiente que gana el raton
+2. Seleccionar aletoriamente la serpiente que gana el rayo
+3. Seleccionar a la serpiente mas grande para que atravece el portal

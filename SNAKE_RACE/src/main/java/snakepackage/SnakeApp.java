@@ -157,11 +157,25 @@ public class SnakeApp extends JFrame {
     }
     
     public void pausar() {
-
+    	int snake = 0;
+    	int max = 0;
         for (int i = 0; i != MAX_THREADS; i++) {
 
             snakes[i].pause();
         }
+        
+        for (int i = 0; i < snakes.length; i++) {
+        	if(snakes[i].getBody().size() > max) {
+        		max = snakes[i].getBody().size();
+        		snake = i;
+        	}
+        }
+        
+        System.out.println("la serpiente mas larga es la " + snake);
+        
+        
+        
+        
     }
     
     public void reanudar() {
@@ -175,4 +189,6 @@ public class SnakeApp extends JFrame {
     public void iniciado() {
     	runnig = true;
     }
+    
+    
 }

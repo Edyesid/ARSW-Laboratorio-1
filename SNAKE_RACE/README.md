@@ -12,6 +12,16 @@ Control threads using wait/notify.
 1. Download the project PrimeFinder. this is a program that calculates prime numbers beetween 0 and M (Control.MAXVALUE),concurrently, distributing the searching of them between n (Control.NTHREADS) independent threads.
 2. Modify the application in such way that each t milliseconds of thread execution, all the threads stop and show the number of primes found until that moment. Then, you have to wait until press ENTER in order to resume the threads execution.Use the synchronization mechanisms given by java (wait y notify, notifyAll).
 
+![PrimeFinderThreadRun](https://user-images.githubusercontent.com/54051399/90579556-0728b200-e18c-11ea-8a3f-f2b66c02e658.PNG)
+
+![notifyAll](https://user-images.githubusercontent.com/54051399/90580089-a13d2a00-e18d-11ea-9be9-7e57d97c6f56.PNG)
+
+Se muestra el codigo implementado para realizar la ejecución de los metodos Wait() y notifyAll() los cuales se encargan de detener la ejecución de los Threads y de notificar a los demás cuando se reanude la ejecución.
+
+![ejecucion](https://user-images.githubusercontent.com/54051399/90580029-75ba3f80-e18d-11ea-843f-dfabdc014e91.PNG)
+
+En esta imagen se muestra la implementación para mostrar la cantidad de numeros primos despues cada TMILISEGUNDOS.
+
 Note that:
 
 - The synchronized statement is used in order to get exclusive access to an object
@@ -29,7 +39,7 @@ SnakeRace is an autonomous version, multi-snake of the famous game called 'snake
 - There are some points (red arrows) that teleport the snakes
 - The rays causes that the snake increase its speed
 
-IMAGEN
+![sshot](https://user-images.githubusercontent.com/54051399/90559772-b8672200-e163-11ea-9d42-3a75cfdde0a3.png)
 
 ### Part 3
 

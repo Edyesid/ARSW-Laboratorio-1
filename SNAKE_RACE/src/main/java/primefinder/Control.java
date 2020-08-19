@@ -54,10 +54,12 @@ public class Control extends Thread {
         		System.out.println("Presione Enter para continuar");
         		
         		Scanner scan = new Scanner(System.in);
-        		while(scan.nextLine()==null) {
+        		String llave = scan.nextLine();
+        		while(llave.isEmpty()) {
         			System.out.println("No reconocido");
         			System.out.println("Presione Enter para continuar");
         			scan = new Scanner(System.in);
+        			llave = scan.nextLine();
         		}
         		for(int i = 0;i < NTHREADS;i++ ) {
                     pft[i].reanudar();

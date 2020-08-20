@@ -46,28 +46,29 @@ public class Control extends Thread {
         	
         	try {
         		sleep(TMILISECONDS);
-        		for(int i = 0;i < NTHREADS;i++ ) {
-                    pft[i].detener();
-                    System.out.println("Cantidad de numeros primos: " + pft[i].getPrimes().size());
-                }
-        		System.out.println("");
-        		System.out.println("Presione Enter para continuar");
         		
-        		Scanner scan = new Scanner(System.in);
-        		String llave = scan.nextLine();
-        		while(llave.isEmpty()) {
-        			System.out.println("No reconocido");
-        			System.out.println("Presione Enter para continuar");
-        			scan = new Scanner(System.in);
-        			llave = scan.nextLine();
-        		}
-        		for(int i = 0;i < NTHREADS;i++ ) {
-                    pft[i].reanudar();
-                }
         	}
         	catch(InterruptedException e){
         		e.printStackTrace();
         	}
+            for(int i = 0;i < NTHREADS;i++ ) {
+                    pft[i].detener();
+                    System.out.println("Cantidad de numeros primos: " + pft[i].getPrimes().size());
+            }
+        	System.out.println("");
+        	System.out.println("Presione Enter para continuar");
+        		
+       		Scanner scan = new Scanner(System.in);
+       		String llave = scan.nextLine();
+       		while(!llave.isEmpty()) {
+        			System.out.println("No reconocido");
+        			System.out.println("Presione Enter para continuar");
+        			scan = new Scanner(System.in);
+        			llave = scan.nextLine();
+      		}
+       		for(int i = 0;i < NTHREADS;i++ ) {
+                   pft[i].reanudar();
+                }
         	
         }
         

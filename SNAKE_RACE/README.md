@@ -52,13 +52,21 @@ SnakeRace is an autonomous version, multi-snake of the famous game called 'snake
     2,2. An incorrect or inappropriate use of collections, considering its concurrent handling(For this increase the game speed and execute it multiples times until an error has been raised).
 
     2,3. Unnecessary use of active waits
+    
+    **Archivo Respuestas.txt**
 
 3. Identify critical regions associated with race conditions, and do something in order to eliminate them.Note that you have to synchronize strictly needed. In the answers document suggest the solution proposed for each item of the point 2. As the same way note that you don´t have to add more race conditions
+
+![Sincronizado](https://user-images.githubusercontent.com/54051399/90706721-74574880-e25b-11ea-9690-440df8267596.PNG)
 
 4. As you can see, the game is incomplete. Write code in order to implement functionallities through buttons in the GUI to start / Pause / Resume the game: start the game if it has not started, Pause the game if it is on, Resume the game if it is suspended. Keep in mind:
 
     4,1. When the game has been paused, in some point of the screen you have to show 
     - the longest snake
     - The worst snake:(the first snake  dead)
+    
+    ![Larga](https://user-images.githubusercontent.com/54051399/90706500-df544f80-e25a-11ea-8c01-5deac1f42277.PNG)
+    
+    Evidencia del codigo
 
     Remember that the pause of the snakes are not instantanious, and you have to      guarantee that all the information showed is consistent

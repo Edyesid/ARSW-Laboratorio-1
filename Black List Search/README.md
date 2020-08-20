@@ -82,11 +82,25 @@ Al momento de quere minimizar la cantidad de consultas por cada caso, el utiliza
 
 From the above, implement the following sequence of experiments to perform the validation of dispersed IP addresses (for example 202.24.34.55), taking the execution times of them (be sure to do them on the same machine):
 
-1. A single thread. 
+1. A single thread.
+
+![img1](https://user-images.githubusercontent.com/54051399/90710530-3ca0ce80-e264-11ea-8d7d-c7cc1429e9b4.PNG)
+
 2. As many threads as processing cores (have the program determine this using the Runtime API). 
-3. As many threads as twice the number of processing cores. 
+
+![img2](https://user-images.githubusercontent.com/54051399/90710654-72de4e00-e264-11ea-95e7-583f5049d0bc.PNG)
+
+3. As many threads as twice the number of processing cores.
+
+![img3](https://user-images.githubusercontent.com/54051399/90710769-ae791800-e264-11ea-9e1f-de5cbf1062bc.PNG)
+
 4. 50 threads 
+
+![img4](https://user-images.githubusercontent.com/54051399/90711037-52fb5a00-e265-11ea-9412-f5c99f16ca59.PNG)
+
 5. 100 threads
+
+![img5](https://user-images.githubusercontent.com/54051399/90711121-80480800-e265-11ea-935e-78706308e461.PNG)
 
 When starting the program run the monitor jVisualVM, and as you run the tests, review and record the CPU and memory consumption in each case.
 
